@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying.....'
+                echo 'Deploying..'
                 sh 'cd Infra_pro_terraform/ && ./infra_build.sh'
             }
         }
