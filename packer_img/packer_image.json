@@ -6,7 +6,7 @@
         "source_ami": "ami-00f4bf657d24a18f6",
         "instance_type": "t2.micro",
         "ssh_username": "ubuntu",
-        "ami_name": "IMG_base_acmc_page-ebs-{{isotime | clean_image_name}}",
+        "ami_name": "IMG_base_acmc_page-ebs-{{isotime | clean_ami_name}}",
         "ssh_timeout": "5m",
         "iam_instance_profile": "EC2InstanceProfileForImageBuilder",
         "vpc_id": "vpc-e3ef609e",
