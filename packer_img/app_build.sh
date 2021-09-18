@@ -7,6 +7,14 @@ echo "################################"
 echo "#  Build the Aplicacion image  #"
 echo "################################"
 
+if [ -d logs/ ];
+then
+echo "#-----> Carpeta Logs existe"
+else
+echo "#-----> Creamos la carpeta Logs"
+mkdir logs
+fi
+
 echo "#-----> STEP_01 <-----#"
 echo "#-----> Export variables to loggin the building"
 
