@@ -41,9 +41,35 @@ variable "instance_type"{
   description = "The type of instance to start"
   default = "t2.micro"
 }
-
-//variable lista
+//variable lista de subnet
 variable "subnetlist" {
   type = list(string)
-  default = ["subnet-fb4d3e9d","subnet-08c2bc29"]
+  default = ["NA","NA2"]
+}
+
+
+//vpc variables
+variable "dhcp_options_domain_name_servers" {
+  description = "Specify a list of DNS server addresses for DHCP options set, default to AWS provided"
+  type = list(string)
+  default     = ["AmazonProvidedDNS"]
+}
+variable "cidr" {
+  description = ""
+  default  = "10.0.0.0/16"
+}
+variable "azs" {
+  description = ""
+  type = list(string)
+  default = ["us-east-1a", "us-east-1b"]
+}
+
+variable "public_subnets" {
+  description = ""
+  type = list(string)
+  default = ["10.0.1.0/24", "10.0.2.0/24"]
+}
+variable "env" {
+  description = "Name of the Environment"
+  default = "production"
 }

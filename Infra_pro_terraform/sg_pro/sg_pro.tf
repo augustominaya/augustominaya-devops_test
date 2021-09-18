@@ -1,6 +1,6 @@
-data "aws_vpc" "vpc" {
-  default = true
-}
+# data "aws_vpc" "vpc" {
+#   default = true
+# }
 
 variable "cluster_name" {
 }
@@ -10,12 +10,14 @@ variable "HostIp" {
 output "ELBSG1" {
         value = aws_security_group.ELB-SG1
 }
+variable "vpc_id" {
+}
 
 # ELB Security Group
 resource "aws_security_group" "ELB-SG1" {
   name                       = "${var.cluster_name}-ELB-SG"
   description                = "Allow all - traffic"
-  vpc_id                     = data.aws_vpc.vpc.id
+  vpc_id                     = var.vpc_id
   ingress {
     from_port                = 80
     to_port                  = 80
@@ -42,7 +44,7 @@ output "webSG2" {
 resource "aws_security_group" "web-SG2" {
         name        = "webserver SG"
         description = "webserver Security Group"
-        vpc_id      = data.aws_vpc.vpc.id
+        vpc_id      = var.vpc_id
         ingress {
                 from_port   = 22
                 to_port     = 22

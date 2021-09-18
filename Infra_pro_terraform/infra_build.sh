@@ -8,7 +8,7 @@
 Test_failed()
 {
 sleep 5
-terraform destroy -auto-approve
+#terraform destroy -auto-approve
 echo "###################################"
 echo "# **ERROR** Test failed **ERROR** #"
 echo "###################################"

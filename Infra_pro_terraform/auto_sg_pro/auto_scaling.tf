@@ -6,6 +6,7 @@ variable "cluster_name" {
 }
 
 variable "subnetlist" {
+
 }
 
 # autoscaling_group configuration

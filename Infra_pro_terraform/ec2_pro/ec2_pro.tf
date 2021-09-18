@@ -10,13 +10,18 @@ variable "instance_type" {
 variable "key_name" {
 }
 variable "subnetlist" {
+
 }
+variable "vpc_id" {
+}
+
 
 #module to define a ec2 and elb security groups
 module "sg_pro"{
     source = "../sg_pro"
     cluster_name = "${var.cluster_name}"
     HostIp = "${var.HostIp}"
+    vpc_id = "${var.vpc_id}"
 }
 
 output "webserverconfig" {
