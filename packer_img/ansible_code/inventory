@@ -1,0 +1,2 @@
+ansible_test ansible_host=3.80.123.178 ansible_user=ubuntu ansible_ssh_private_key_file=../aws_ssh_key/Terraform_key.pem ansible_python_interpreter=/usr/bin/python3
+

@@ -1,0 +1,13 @@
+# Local .terraform directories
+**/.terraform/*
+# Directories
+.terraform/
+.terraform.*
+Terraform_key.pem
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+#logs
+packer_img/logs/*.txt

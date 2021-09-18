@@ -1,0 +1,9 @@
+---
+#sudo ansible-playbook -i inventory install_jenkins.yml
+- name: Install Jenkins
+  hosts: jenkins_server
+  gather_facts: false
+  become: true
+  tasks:
+  - import_role:
+      name: jenkins

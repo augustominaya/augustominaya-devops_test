@@ -1,0 +1,56 @@
+- name: Start the acmc web page installation with Ansible
+  hosts: 127.0.0.1
+  #hosts: ansible_test
+  connection: local
+  become: true
+  gather_facts: true
+
+  tasks:
+  - name: STEP_01.01 -> Actualizacion Lista de paquetes.
+    apt: update_cache=yes
+    tags: [STEP_01]
+  - name: STEP_01.02 -> Instalacion pip3.
+    apt: name=python3-pip state=latest
+    tags: [STEP_01]
+  - name: STEP_01.03 -> Install Apache2
+    apt: name=apache2 state=latest
+    tags: [STEP_01]
+
+  - name: STEP_01.04 -> Install Moduler; Json,curl,ssh,cgi,php7.
+    apt:
+      name:
+        - php7.4-curl
+        - php7.4-json
+        - php7.4-cgi
+        - php7.4
+        - libapache2-mod-php7.4
+        - php-mbstring
+        - php-ssh2
+      # name: "{{ lista_paquetes }}"
+      state: present
+    tags: [STEP_01]
+
+  - name: STEP_01.05 -> Add the user ubuntu to apache group
+    user:
+      name: ubuntu
+      groups: www-data
+      append: yes
+    tags: [STEP_01]
+
+  - name: STEP_01.06 -> Recursively remove directory
+    file:
+      path: /var/www/html/
+      state: absent
+
+  - name: STEP_01.07 -> clone of a single branch
+    git:
+      repo: https://github.com/augustominaya/augustominaya_page.git
+      dest: /var/www/html/
+
+  - name: STEP_01.08 -> Recursively change ownership of a directory
+    file:
+      path: /var/www
+      state: directory
+      recurse: yes
+      owner: ubuntu
+      group: www-data

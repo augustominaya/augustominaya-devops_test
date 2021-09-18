@@ -1,0 +1,43 @@
+{
+    "builders": [
+      {
+        "type": "amazon-ebs",
+        "region": "us-east-1",
+        "source_ami": "ami-00f4bf657d24a18f6",
+        "instance_type": "t2.micro",
+        "ssh_username": "ec2-user",
+        "ami_name": "augustominaya-ebs-{{isotime | clean_resource_name}}",
+        "ssh_timeout": "5m",
+        "iam_instance_profile": "EC2InstanceProfileForImageBuilder",
+        "vpc_id": "vpc-e3ef609e",
+        "subnet_id": "subnet-2eeae963",
+        "security_group_id": "sg-00b818336c6a9113b",
+        "associate_public_ip_address": true,
+        "run_tags": {
+          "Name": "web-server-packer-augustominaya.com"
+        },
+        "tags": {
+          "Name": "webserver-augustominaya.com"
+        }
+      }
+    ],
+    "provisioners": [
+      {
+        "type": "shell",
+        "inline": [
+            "sudo yum update -y",
+            "sudo amazon-linux-extras install -y php7.2",
+            "sudo yum install -y httpd",
+            "sudo systemctl start httpd",
+            "sudo systemctl enable httpd",
+            "sudo yum install -y git",
+            "sudo usermod -a -G apache ec2-user",
+            "sudo chown -R ec2-user:apache /var/www",
+            "sudo chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \\;",
+            "find /var/www -type f -exec sudo chmod 0664 {} \\;",
+            "git clone https://github.com/augustominaya/augustominaya_page.git /var/www/html/"
+        ]
+      }
+    ]
+  }
+  

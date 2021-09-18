@@ -1,0 +1,67 @@
+- name: STEP_01.01 -> Update package list.
+  apt: update_cache=yes
+  tags: [STEP_01]
+
+- name: STEP_01.02 -> Update package.
+  apt: upgrade=dist
+  tags: [STEP_01]
+
+- name: STEP_01.03 -> Instalacion pip3.
+  apt: name=python3-pip state=latest
+  tags: [STEP_01]
+
+- name: STEP_01.04 -> install java8
+  apt: name=openjdk-8-jre state=latest
+  tags: [STEP_01]
+
+- name: STEP_01.05 -> Add jenkins key
+  apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
+  tags: [STEP_01]
+
+- name: STEP_01.06 -> Add jenkins repository
+  apt_repository: repo='deb https://pkg.jenkins.io/debian-stable binary/' state=present
+  tags: [STEP_01]
+
+- name: STEP_01.07 -> install an Update Jenkins
+  apt: name=jenkins update_cache=yes
+  tags: [STEP_01]
+
+- name: STEP_01.08 -> start the Jenkins services
+  service: name=jenkins state=started
+  tags: [STEP_01]
+
+- name: STEP_01.09 -> install awscls
+  apt: name=awscli state=latest
+  tags: [STEP_01]
+
+- name: STEP_01.10 -> Instalacion ansible.
+  apt: name=ansible state=latest
+  tags: [STEP_01]
+
+- name: STEP_01.11 -> Instalacion zip.
+  apt: name=zip state=latest
+  tags: [STEP_01]
+
+- name: STEP_01.12 -> terraform install
+  unarchive:
+    src: https://releases.hashicorp.com/terraform/0.9.1/terraform_0.9.1_linux_amd64.zip
+    dest: /usr/bin
+    remote_src: True
+  tags: [STEP_01,STEP_0112]
+
+- name: STEP_01.13 -> Instalacion packer.
+  apt: name=packer state=latest
+  tags: [STEP_01,STEP_0113]
+
+- name: Install plugin
+  jenkins_plugin:
+    name: build-pipeline-plugin
+    url_username: aminaya
+    url_password: Colegio0885
+    url: '{{jenkins_server_URL}}'
+  tags: [STEP_01, STEP_0111]
+
+- name: Install plugin
+  jenkins_plugin:
+    name: build-pipeline-plugin
+  tags: [STEP_01, STEP_0111]
