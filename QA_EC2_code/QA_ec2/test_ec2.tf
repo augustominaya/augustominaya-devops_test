@@ -37,7 +37,7 @@ resource "aws_instance" "QA_ec2" {
       connection {
 		type        = "ssh"
 		user        = "ubuntu"
-    private_key = "${file("./aws_ssh_key/Terraform_key.pem")}"
+    private_key = "${file("../aws_ssh_key/Terraform_key.pem")}"
 		host        = "${aws_instance.QA_ec2.public_ip}"
 	}
   
