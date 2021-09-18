@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Test_QA_EC2') {
+            steps {
+                echo 'Testing..'
+               sh 'cd QA_EC2_code/ && ./app_test.sh'
+            }
+        }
+        stage('Build_packer_image') {
+            steps {
+                echo 'Building..'
+                sh 'cd packer_img/ && ./app_build.sh'
+            }
+        }
+        stage('Deploy_Infra_Pro') {
+            steps {
+                echo 'Deploying..'
+                sh 'cd Infra_pro_terraform/ && ./infra_build.sh'
+            }
+        }
+    }
+}
