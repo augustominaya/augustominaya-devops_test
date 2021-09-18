@@ -18,6 +18,13 @@ fi
 echo "#-----> STEP_01 <-----#"
 echo "#-----> Export variables to loggin the building"
 
+export last_ami_use=`cat ../packer_img/last_image.log`
+if [[ -z $last_ami_use ]]
+then  
+echo "-----> Error export last image generate from packer, check the file: ../packer_img/last_image.log"
+exit 1
+fi
+
 export PACKER_IMG="packer_img"
 export nombre_log=packer_log01_$(date +"%F_%H%M%S").txt
 export PACKER_LOG=1
