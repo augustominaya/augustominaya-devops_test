@@ -11,6 +11,7 @@ module "ec2_pro"{
     instance_type = "${var.instance_type}"
     key_name = "${var.key_name}"
     HostIp = "${var.HostIp}"
+    subnetlist = "${var.subnetlist}"
 }
 
 # module autoscaling_group configuration
@@ -19,5 +20,6 @@ module "auto_scaling"{
     web_server_config = module.ec2_pro.webserverconfig
     load_balance_conf = module.ec2_pro.load_balance_conf
     cluster_name = "${var.cluster_name}"
+    subnetlist = "${var.subnetlist}"
 
 }

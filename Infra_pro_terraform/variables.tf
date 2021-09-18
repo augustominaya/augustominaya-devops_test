@@ -42,3 +42,8 @@ variable "instance_type"{
   default = "t2.micro"
 }
 
+//variable lista
+variable "subnetlist" {
+  type = list(string)
+  default = ["subnet-fb4d3e9d","subnet-08c2bc29"]
+}

@@ -83,7 +83,7 @@ terraform destroy -auto-approve
 echo "##################################"
 echo "#  Testing complete successfully #"
 echo "##################################"
-echo "-----> The app is deply and Responde code: $result_code in the URL: http://$PublicIP "
+echo "-----> The app is deploy and Responde code: $result_code in the URL: http://$PublicIP "
 
 fi
 

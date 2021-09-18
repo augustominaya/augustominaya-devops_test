@@ -44,9 +44,9 @@ exit 1
 fi
 
 
-echo "#################################"
-echo "#  Build complete successfully  #"
-echo "#################################"
+echo "########################################"
+echo "#  Deploy Infra complete successfully  #"
+echo "########################################"
 
 
 

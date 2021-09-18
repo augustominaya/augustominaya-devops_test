@@ -5,6 +5,9 @@ variable "load_balance_conf" {
 variable "cluster_name" {
 }
 
+variable "subnetlist" {
+}
+
 # autoscaling_group configuration
 
 resource "aws_autoscaling_group" "web-auto-scaling" {
@@ -13,8 +16,8 @@ resource "aws_autoscaling_group" "web-auto-scaling" {
   max_size                = "4"
   load_balancers          = [var.load_balance_conf.id]
   health_check_type       = "ELB"
-  vpc_zone_identifier     = ["subnet-2eeae963"]
-
+  #vpc_zone_identifier     = ["subnet-2eeae963"]
+  vpc_zone_identifier     = "${var.subnetlist}"
 
   tags = concat([
 {

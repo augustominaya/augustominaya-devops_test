@@ -9,7 +9,8 @@ variable "instance_type" {
 }
 variable "key_name" {
 }
-
+variable "subnetlist" {
+}
 
 #module to define a ec2 and elb security groups
 module "sg_pro"{
@@ -40,7 +41,7 @@ output "load_balance_conf" {
 #load balance configuration
 resource "aws_elb" "load-balance-conf" {
   name = "${var.cluster_name}"
-  subnets                     = ["subnet-2eeae963"]
+  subnets                     = "${var.subnetlist}"
   security_groups             = [module.sg_pro.ELBSG1.id]
   internal                    = false
   cross_zone_load_balancing   = true
