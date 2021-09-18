@@ -33,7 +33,7 @@
       },
       {
         "type": "ansible-local",
-        "playbook_file": "packer_img/ansible_code/install_acmc_page.yml"
+        "playbook_file": "./ansible_code/install_acmc_page.yml"
 
       }
     ]
