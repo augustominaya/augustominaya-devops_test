@@ -1,24 +1,32 @@
 pipeline {
     agent any
 
+    environment {
+        JENKINS_HOME = '/var/lib/jenkins'
+        DEVOPS_CODE   = '${JENKINS_HOME}/workspace/devops_test'
+        PACKER_IMG   = '${DEVOPS_CODE}/packer_img/'
+        QA_EC2_CODE  = '${DEVOPS_CODE}/QA_EC2_code/'
+        INFRA_PRO    = '${DEVOPS_CODE}/Infra_pro_terraform/'
+    }
+
     stages {
 
         stage('Test_QA_EC2') {
             steps {
                 echo 'Testing..'
-               sh 'cd QA_EC2_code/ && ./app_test.sh'
+               sh 'cd ${QA_EC2_CODE} && ./app_test.sh'
             }
         }
         stage('Build_packer_image') {
             steps {
                 echo 'Building..'
-                sh 'cd packer_img/ && ./app_build.sh'
+                sh 'cd ${PACKER_IMG} && ./app_build.sh'
             }
         }
         stage('Deploy_Infra_Pro') {
             steps {
                 echo 'Deploying..'
-                sh 'cd Infra_pro_terraform/ && ./infra_build.sh'
+                sh 'cd ${INFRA_PRO} && ./infra_build.sh'
             }
         }
     }
