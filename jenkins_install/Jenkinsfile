@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     environment {
-        JENKINS_HOME = '/var/lib/jenkins'
-        DEVOPS_CODE   = '${JENKINS_HOME}/workspace/devops_test'
-        PACKER_IMG   = '${DEVOPS_CODE}/packer_img/'
-        QA_EC2_CODE  = '${DEVOPS_CODE}/QA_EC2_code/'
-        INFRA_PRO    = '${DEVOPS_CODE}/Infra_pro_terraform/'
+        JENKINS_HOME = "/var/lib/jenkins"
+        DEVOPS_CODE   = "${JENKINS_HOME}/workspace/devops_test"
+        PACKER_IMG   = "${DEVOPS_CODE}/packer_img/"
+        QA_EC2_CODE  = "${DEVOPS_CODE}/QA_EC2_code/"
+        INFRA_PRO    = "${DEVOPS_CODE}/Infra_pro_terraform/"
     }
 
     stages {
