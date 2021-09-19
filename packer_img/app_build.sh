@@ -17,7 +17,7 @@ fi
 
 echo "#-----> STEP_01 <-----#"
 echo "#-----> Export variables to loggin the building"
-
+sleep 1
 export last_ami_use=`cat ../packer_img/last_image.log`
 if [[ -z $last_ami_use ]]
 then  
@@ -25,15 +25,28 @@ echo "-----> Error export last image generate from packer, check the file: ../pa
 exit 1
 fi
 
+echo "#-----> STEP_02 <-----#"
+echo "#-----> Packer validate config file"
+packer validate packer_image.json
+
+if [ $? -ne '0' ]
+then  
+echo "-----> ERROR - Packer validation"
+exit 1
+else
+echo "-----> Packer validation is OK"
+fi
+
+sleep 1
 export PACKER_IMG="packer_img"
 export nombre_log=packer_log01_$(date +"%F_%H%M%S").txt
 export PACKER_LOG=1
 export PACKER_LOG_PATH="logs/$nombre_log"
 
-echo "#-----> STEP_02 <-----#"
+echo "#-----> STEP_03 <-----#"
 echo "#-----> Packer build image"
 
-packer build packer_image.json
+#packer build packer_image.json
 
 if [ $? -ne '0' ]
 then  
@@ -41,7 +54,7 @@ echo "-----> Packer Error building image, Please check the logs in the screen"
 exit 1
 fi
 
-echo "#-----> STEP_03 <-----#"
+echo "#-----> STEP_04 <-----#"
 echo "#-----> Recover AMI id from the executing log: $nombre_log"
 
 export AMI=`cat logs/$nombre_log |grep "amazon-ebs: AMI:" |sed -e "s/ //g" |cut -d ":" -f 6`
