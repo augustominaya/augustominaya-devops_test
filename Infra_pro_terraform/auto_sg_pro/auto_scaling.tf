@@ -20,6 +20,14 @@ resource "aws_autoscaling_group" "web-auto-scaling" {
   #vpc_zone_identifier     = ["subnet-2eeae963"]
   vpc_zone_identifier     = "${var.subnetlist}"
 
+  instance_refresh {
+    strategy = "Rolling"
+    preferences {
+      min_healthy_percentage = 50
+    }
+    triggers = ["tag"]
+  }
+  
   tags = concat([
 {
 "key" = "Name"
