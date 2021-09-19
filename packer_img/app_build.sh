@@ -46,7 +46,7 @@ export PACKER_LOG_PATH="logs/$nombre_log"
 echo "#-----> STEP_03 <-----#"
 echo "#-----> Packer build image"
 
-#packer build packer_image.json
+packer build packer_image.json
 
 if [ $? -ne '0' ]
 then  
