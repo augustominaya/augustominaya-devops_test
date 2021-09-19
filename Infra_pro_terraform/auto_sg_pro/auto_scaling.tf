@@ -22,12 +22,12 @@ resource "aws_autoscaling_group" "web-auto-scaling" {
 
   instance_refresh {
     strategy = "Rolling"
-    # preferences {
-    #   min_healthy_percentage = 50
-    # }
+    preferences {
+      min_healthy_percentage = 50
+    }
     triggers = ["tag"]
   }
-
+  
   tags = concat([
 {
 "key" = "Name"
