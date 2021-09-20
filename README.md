@@ -80,6 +80,30 @@ Subfolders and their content:
 * **vpc_modules.** Module that allows you to create the production vpc.
 * **infra_build.sh,** script called from Jenkins to build the infrastructure in production.
 
+
+
+# Implementation detail.
+
+Jenkins is the main implementation where processes are stored and run. It is responsible for receiving the events from github and proceeding with the execution of the pipeline to perform the unit tests, the construction of the image and the deployment in production.
+
+To get Jenkins up and running we need the following prerequisites.
+
+1- A computer where the code is downloaded from the repository, must have the following tools installed; git, ansible, terraform, aws cli, and packer.
+
+2- You must have an account registered in aws with administrator permissions, and a type rsa key pair. The account will be configured in aws cli and the key will be used in all the instances that we will be working on.
+
+## Implementation of the Jenkins instance in AWS.
+
+* We download the code from the repository on github.
+
+```sh
+git clone https://github.com/augustominaya/augustominaya-devops_test.git devops_test
+```
+* We move to the ec2_jenkins subdirectory and open the ec3_jenkins_main.tf file to locate the variables below.
+```sh
+cd jenkins_install/terraform_jenkins/ec2_jenkins/ && vi ec2_jenkins_main.tf 
+```
+
 ![CI/CI Pipeline](/images_infra/cicdpipeline.png)
 
 ## Explanation of the CI/CD process
