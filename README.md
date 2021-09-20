@@ -21,7 +21,22 @@
 * QA - EC2 - test. It is the instance that runs when it is necessary to test the application.
 * Elastic ip Address. Ip publishes static assigned to the Jenkins instance so github can communicate.
 
+## Implementation of the infrastructure.
+
+### Technological prerequisites:
+
+* Cloud computing provider. **AWS.**
+* Open source operating systems. **Linux, Ubuntu server.**
+* Version control. **Git**
+* Code repository. **Github.**
+* Continuous integration automation. **Jenkins.**
+* Automation of configuration and provisioning. **Ansible.**
+* Construction of imagener and templates. **Packer.**
+* Infrastructure management as code. **Terraform.**
+* Knowledge in; **shell script, json encode, php, html, Devops concept.**
+
 ![CI/CI Pipeline](/images_infra/cicdpipeline.png)
+
 
 ## Explanation of the CI/CD process
 
