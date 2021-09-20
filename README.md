@@ -15,7 +15,7 @@
 * Internet gateway. It allows the VPC to have communication with the outside world.
 * To my. The image repository appears in aws.
 * Developer VPC 172.30.0.0/16. Segment that is hosting the non-productive services.
-* Availability zone 3. You are in a different availability zone than the production services.
+* Availability zone 3. Availability zone where the non-production instances are located.
 * Private Subnet. Private sub network where the non-productive services are located.
 * Jenkins - EC2. It is the instance where the Jenkins automation tool is installed.
 * QA - EC2 - test. It is the instance that runs when it is necessary to test the application.
