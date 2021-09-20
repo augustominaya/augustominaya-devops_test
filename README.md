@@ -2,7 +2,41 @@
 
 ![CI/CI Pipeline](/images_infra/infras_cicd.png)
 
+## Description of the infrastructure
+
+* AWS Region (us-east-1). Northern Virginia is the region where our infrastructure is located.
+* VPC of production segment 10.0.0.0/16. It is the segment where the production services are hosted.
+* Route53 - timevaluerd.com. A domain was created to have a more friendly dns and to be able to direct the traffic from the internet to our infrastructure.
+* Availability zone 1 and 2. We have 2 zones or data centers for high availability.
+* Public Subnet. It is the subnet where the instances that provide services to the production are located
+* Auto Scaling group. It allows us to have an auto scaling of resources in the face of high application demand, starting with 2 until reaching 4. The automatic refreshing is also configured before an image change.
+* Elastic Load Balancing. It allows load balancing between both instances located in different Availability Zones.
+* EC2 app Instance. They are instances created from the image that the application contains.
+* Internet gateway. It allows the VPC to have communication with the outside world.
+* To my. The image repository appears in aws.
+* Developer VPC 172.30.0.0/16. Segment that is hosting the non-productive services.
+* Availability zone 3. Availability zone where the non-production instances are located.
+* Private Subnet. Private sub network where the non-productive services are located.
+* Jenkins - EC2. It is the instance where the Jenkins automation tool is installed.
+* QA - EC2 - test. It is the instance that runs when it is necessary to test the application.
+* Elastic ip Address. Ip publishes static assigned to the Jenkins instance so github can communicate.
+
+## Implementation of the infrastructure.
+
+### Technological prerequisites:
+
+* Cloud computing provider. **AWS.**
+* Open source operating systems. **Linux, Ubuntu server.**
+* Version control. **Git**
+* Code repository. **Github.**
+* Continuous integration automation. **Jenkins.**
+* Automation of configuration and provisioning. **Ansible.**
+* Construction of imagener and templates. **Packer.**
+* Infrastructure management as code. **Terraform.**
+* Knowledge in; **shell script, json encode, php, html, Devops concept.**
+
 ![CI/CI Pipeline](/images_infra/cicdpipeline.png)
+
 
 ## Explanation of the CI/CD process
 
