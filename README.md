@@ -1,6 +1,8 @@
 # Implementation of a CI/CD infrastructure
 
-## Technological prerequisites:
+![](/images_infra/iconos_tecnogia.png)
+
+## Technology prerequisites:
 
 * Cloud computing provider. **AWS.**
 * Open source operating systems. **Linux, Ubuntu server.**
