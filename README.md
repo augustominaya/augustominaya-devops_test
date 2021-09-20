@@ -99,9 +99,9 @@ To get Jenkins up and running we need the following prerequisites.
 ```sh
 git clone https://github.com/augustominaya/augustominaya-devops_test.git devops_test
 ```
-* We move to the ec2_jenkins subdirectory and open the ec3_jenkins_main.tf file to locate the variables below.
+* We must change some variables inside the ec2_jenkins_main.tf file located in the path devops_test / jenkins_install / terraform_jenkins / ec2_jenkins /
 ```sh
-cd jenkins_install/terraform_jenkins/ec2_jenkins/ && vi ec2_jenkins_main.tf 
+vi devops_test/jenkins_install/terraform_jenkins/ec2_jenkins/ec2_jenkins_main.tf
 ```
 
 ![CI/CI Pipeline](/images_infra/cicdpipeline.png)
