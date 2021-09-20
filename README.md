@@ -146,7 +146,7 @@ vi jenkins_install/ansible_jenkins/roles/jenkins/vars/main.yml
 ```sh
 cd jenkins_install/ansible_jenkins/ && sudo ansible-playbook -i inventory install_jenkins.yml
 ```
-
+6. Ansible is responsible for installing the necessary tools so that the jenkins server can execute all the processes that the pipeline steps need.
 
 ![CI/CI Pipeline](/images_infra/cicdpipeline.png)
 
