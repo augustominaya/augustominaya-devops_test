@@ -41,16 +41,14 @@
 
 ![Directories](/images_infra/directories.png)
 
-#### 1- Infra_pro_terraform: Contains the terraform code to mount the infrastructure and a shell script used by the pipeline in Jenkins.
+#### 1- jenkins_install: contains the terraform code to build the jenkins instance, ansible for the configuration of all dependencies, some scripts and the Jenkins file that we will execute in the pipeline.
 
 Subfolders and their content:
 
-* **auto_sg_pro.** Module to create the auto scaling group and policy resources.
-* **ec2_pro.** Module to create load balancing resources and ec2 instances.
-* **script.** It contains a script to stop an instance from the console "stop_instance.sh" and a script to run a stress test on an instance "run_cpu_stress.sh".
-* **sg_pro.** Module to create the security groups of the ec2 and load balance instances.
-* **vpc_modules.** Module that allows you to create the production vpc.
-* **infra_build.sh,** script called from Jenkins to build the infrastructure in production.
+* **ansible_jenkins.** Ansible's playbook to configure and install dependencies on the server.
+* **script.** Start, stop and terminate Jenkins instance from shell script by command line.
+* **terraform_jenkins.** Terraform code to create the jenkins instance.
+* **Jenkinsfile.** The steps to execute the pipeline are defined.
 
 #### 2- QA_EC2_code: Contains the terraform code to create the QA instance to test the new code, and the “app_test.sh” script used by jenkins to call the terraform code.
 
@@ -60,16 +58,7 @@ Subfolders and their content:
 * **QA_sg.** Module to create the security group.
 * **app_test.sh,** script called from jenkins to create QA test instance.
 
-#### 3- jenkins_install: contains the terraform code to build the jenkins instance, ansible for the configuration of all dependencies, some scripts and the Jenkins file that we will execute in the pipeline.
-
-Subfolders and their content:
-
-* **ansible_jenkins.** Ansible's playbook to configure and install dependencies on the server.
-* **script.** Start, stop and terminate Jenkins instance from shell script by command line.
-* **terraform_jenkins.** Terraform code to create the jenkins instance.
-* **Jenkinsfile.** The steps to execute the pipeline are defined.
-
-#### 4- packer_img. It contains the files necessary to provision the server and create the image with the new version of the code.
+#### 3- packer_img. It contains the files necessary to provision the server and create the image with the new version of the code.
 
 Subfolders and their content:
 
@@ -80,6 +69,17 @@ Subfolders and their content:
 * **packer_image.json,** code in json format that allows packer to build the image.
 * **previous_image.log,** ami identifier in aws of the previous image created by packer.
 
+#### 4- Infra_pro_terraform: Contains the terraform code to mount the infrastructure and a shell script used by the pipeline in Jenkins.
+
+Subfolders and their content:
+
+* **auto_sg_pro.** Module to create the auto scaling group and policy resources.
+* **ec2_pro.** Module to create load balancing resources and ec2 instances.
+* **script.** It contains a script to stop an instance from the console "stop_instance.sh" and a script to run a stress test on an instance "run_cpu_stress.sh".
+* **sg_pro.** Module to create the security groups of the ec2 and load balance instances.
+* **vpc_modules.** Module that allows you to create the production vpc.
+* **infra_build.sh,** script called from Jenkins to build the infrastructure in production.
+
 ![CI/CI Pipeline](/images_infra/cicdpipeline.png)
 
 ## Explanation of the CI/CD process
@@ -87,9 +87,9 @@ Subfolders and their content:
 1. The developer Augusto makes a commit and then a push to the github repository.
 2. the push causes Github to generate a webhook event to call Jenkins.
 3. Jenkins activates a pipeline task with 3 steps.
-4. Step one, execute a script that calls terraform to create an EC2 where the new version of the application is deploy and later a navigation test is executed.
-5. Step two, run a script that calls packer to build an image including the new version of the application and its dependencies.
-6. Step three, execute a script that calls terraform to deploy the image created with packer that contains the new version of the code.
+4. Step one "Unit test" = **"Test_QA_EC2"**, execute a script that calls terraform to create an EC2 where the new version of the application is deploy and later a navigation test is executed.
+5. Step two "Build Phase" = **"Build_packer_image"**, run a script that calls packer to build an image including the new version of the application and its dependencies.
+6. Step three "Production" = **"Deploy_Infra_Pro"**, execute a script that calls terraform to deploy the image created with packer that contains the new version of the code.
 
 ![Jenkins Pipeline](/images_infra/pipeline.png)
 
@@ -107,7 +107,31 @@ Subfolders and their content:
 * **Response code ok ?** If the http code is satisfactory we give the test completed, otherwise it is unsuccessful. **Test failed**
 * **Terraform destroy.** The test completes successfully, we terminate the instance with terraform destroy.
 * **Test complete.** The application test is completed successfully. 
+* **End.**
 
-![Jenkins Pipeline](/images_infra/pipelinestep2.png)
+![Jenkins Pipeline](/images_infra/pipelinestep22.png)
+
+### Jenkins Pipeline Step 2 - Build_packer_image
+
+* **Logs directory exists ?** It is verified that the logs directory exists, otherwise it is created and the process continues.
+* **packer validate.** Process that validates the configuration file in json format.
+* **config file ok ?** If the configuration file is validated, the process continues, otherwise the process is unsuccessful.
+* **Setting enviroment variable.** 4 environment variables are configured before building the image.
+* **Packer build.** The packer build command is executed to start the image build process.
+* **Build ok ?** If the construction is completed satisfactorily, we continue the process, otherwise the process is unsuccessful.
+* **Save the last image id to a file.** The id of the previous image is saved in a file.
+* **Save the new image id to a file.** The id of the image generated by packer during construction is saved in a file.
+* **Build complete.** Construction is completed.
+* **End.**
 
 ![Pipeline step 3 Deploy_Infra_Pro](/images_infra/pipelinestep3.png)
+
+### Jenkins Pipeline Step 3 - Deploy_Infra_Pro
+
+* **image in packer ?** If there is an image created by packer, the process continues, otherwise the deployment is unsuccessful.
+* **Terraform apply.** We proceed with the deployment of the infrastructure.
+* **Terraform error.** If there are no errors it continues, otherwise the deployment is unsuccessful.
+* **Verify instance.** It is verified that the instances start with the new image.
+* **New image ok ?** If the new image is deployed in the instances, the deployment is complete, otherwise it is re-verified.
+* **Deploy complete.** Deployment completed.
+* **End.**
