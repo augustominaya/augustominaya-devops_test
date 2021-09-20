@@ -52,6 +52,22 @@ Subfolders and their content:
 * **vpc_modules.** Module that allows you to create the production vpc.
 * **infra_build.sh,** script called from Jenkins to build the infrastructure in production.
 
+#### 2- QA_EC2_code: Contains the terraform code to create the QA instance to test the new code, and the “app_test.sh” script used by jenkins to call the terraform code.
+
+Subfolders and their content:
+
+* **QA_ec2.** Moludo to create the ec2 instance, and the app_deploy.sh script to deploy the application after the instance is up.
+* **QA_sg.** Module to create the security group.
+* **app_test.sh,** script called from jenkins to create QA test instance.
+
+#### 3- jenkins_install: contains the terraform code to build the jenkins instance, ansible for the configuration of all dependencies, some scripts and the Jenkins file that we will execute in the pipeline.
+
+Subfolders and their content:
+
+* **ansible_jenkins.** Ansible's playbook to configure and install dependencies on the server.
+* **script.** Start, stop and terminate Jenkins instance from shell script by command line.
+* **terraform_jenkins.** Terraform code to create the jenkins instance.
+* **Jenkinsfile.** The steps to execute the pipeline are defined.
 
 ![CI/CI Pipeline](/images_infra/cicdpipeline.png)
 
