@@ -124,3 +124,13 @@ Subfolders and their content:
 * **End**
 
 ![Pipeline step 3 Deploy_Infra_Pro](/images_infra/pipelinestep3.png)
+
+### Jenkins Pipeline Step 3 - Deploy_Infra_Pro
+
+* **image in packer ?** If there is an image created by packer, the process continues, otherwise the deployment is unsuccessful.
+* **Terraform apply.** We proceed with the deployment of the infrastructure.
+* **Terraform error.** If there are no errors it continues, otherwise the deployment is unsuccessful.
+* **Verify instance.** It is verified that the instances start with the new image.
+* **New image ok ?** If the new image is deployed in the instances, the deployment is complete, otherwise it is re-verified.
+* **Deploy complete.** Deployment completed.
+* **The end.**
