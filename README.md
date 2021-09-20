@@ -10,7 +10,7 @@
 * Code repository. **Github.**
 * Continuous integration automation. **Jenkins.**
 * Automation of configuration and provisioning. **Ansible.**
-* Construction of imagener and templates. **Packer.**
+* Image builder. **Packer.**
 * Infrastructure management as code. **Terraform.**
 * Knowledge in; **shell script, json encode, php, html, Devops concept.**
 
@@ -27,7 +27,7 @@
 * Elastic Load Balancing. It allows load balancing between both instances located in different Availability Zones.
 * EC2 app Instance. They are instances created from the image that the application contains.
 * Internet gateway. It allows the VPC to have communication with the outside world.
-* To my. The image repository appears in aws.
+* AMI. The image repository appears in aws.
 * Developer VPC 172.30.0.0/16. Segment that is hosting the non-productive services.
 * Availability zone 3. Availability zone where the non-production instances are located.
 * Private Subnet. Private sub network where the non-productive services are located.
@@ -87,6 +87,9 @@ Subfolders and their content:
 1. The developer Augusto makes a commit and then a push to the github repository.
 2. the push causes Github to generate a webhook event to call Jenkins.
 3. Jenkins activates a pipeline task with 3 steps.
-4. Step one, execute a script that calls terraform to create an EC2 where the new version of the application is displayed and later a navigation test is executed.
+4. Step one, execute a script that calls terraform to create an EC2 where the new version of the application is deploy and later a navigation test is executed.
 5. Step two, run a script that calls packer to build an image including the new version of the application and its dependencies.
 6. Step three, execute a script that calls terraform to deploy the image created with packer that contains the new version of the code.
+
+![Jenkins Pipeline](/images_infra/pipeline.png)
+
