@@ -27,7 +27,7 @@
 * Elastic Load Balancing. It allows load balancing between both instances located in different Availability Zones.
 * EC2 app Instance. They are instances created from the image that the application contains.
 * Internet gateway. It allows the VPC to have communication with the outside world.
-* To my. The image repository appears in aws.
+* AMI. The image repository appears in aws.
 * Developer VPC 172.30.0.0/16. Segment that is hosting the non-productive services.
 * Availability zone 3. Availability zone where the non-production instances are located.
 * Private Subnet. Private sub network where the non-productive services are located.
