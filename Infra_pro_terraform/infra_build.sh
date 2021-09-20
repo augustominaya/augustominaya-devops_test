@@ -43,6 +43,27 @@ echo "-----> Terraform Error, Please check the logs in the screen"
 exit 1
 fi
 
+echo "#-----> STEP_03 <-----#"
+echo "#-----> check the application of the change of image"
+
+min_instance=2
+new_instance_cout=`aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=tag:Name,Values='*cluster*'"  |grep $last_ami |wc -l`
+
+ while [ $min_instance -gt 0 ] ;do
+new_instance_cout=`aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=tag:Name,Values='*cluster*'" |grep $last_ami |wc -l`
+
+sleep 1
+if [ $new_instance_cout -ge 1 ]
+then  
+
+echo "-----> wait, the autoscaling group makeover is not complete yet. instans ok: $new_instance_cout"
+let min_instance=$min_instance-1
+else
+echo "-----> wait, the autoscaling group makeover is not complete yet. instans ok: $new_instance_cout"
+
+fi         
+done
+echo "-----> Autoscaling group complete change images"
 
 echo "########################################"
 echo "#  Deploy Infra complete successfully  #"
