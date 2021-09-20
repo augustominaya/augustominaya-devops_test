@@ -27,11 +27,6 @@ variable "cluster_name" {
   default = "webserver-cluster"
 }
 
-variable "HostIp" {
-  description = " Host IP to be allowed SSH for"
-  default     = "179.52.233.181/32"
-}
-
 variable "last_ami"{
   description = "ID of AMI to use for the instance"
   default = "Not_Image"

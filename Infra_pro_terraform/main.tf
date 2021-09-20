@@ -10,7 +10,6 @@ module "ec2_pro"{
     ami = "${var.last_ami}"
     instance_type = "${var.instance_type}"
     key_name = "${var.key_name}"
-    HostIp = "${var.HostIp}"
     #subnetlist = "${var.subnetlist}"
     subnetlist = "${module.vpc.public_subnets}"
     vpc_id = "${module.vpc.vpc_id}"
@@ -54,3 +53,23 @@ module "vpc" {
   }
 }
 
+
+resource "aws_route53_zone" "zoneroute53" {
+  name = "timevaluerd.com"
+}
+
+# resource "aws_route53_record" "awsa" {
+#   zone_id = aws_route53_zone.zoneroute53.zone_id
+#   name    = "aws2.timevaluerd.com"
+#   type    = "A"
+#   ttl     = "300"
+#   records = [module.ec2_pro.load_balance_conf.vpc_id]
+# }
+
+resource "aws_route53_record" "aws" {
+  zone_id = aws_route53_zone.zoneroute53.zone_id
+  name    = "aws.timevaluerd.com"
+  type    = "CNAME"
+  ttl     = "300"
+  records = [module.ec2_pro.load_balance_conf.dns_name]
+}

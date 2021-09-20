@@ -4,8 +4,6 @@
 
 variable "cluster_name" {
 }
-variable "HostIp" {
-}
 
 output "ELBSG1" {
         value = aws_security_group.ELB-SG1
@@ -58,12 +56,6 @@ resource "aws_security_group" "web-SG2" {
                 cidr_blocks = [ "0.0.0.0/0" ]
         }
 
-        ingress {
-                from_port   = 80
-                to_port     = 80
-                protocol    = "tcp"
-                cidr_blocks = ["${var.HostIp}"]
-        }
         ingress {
                 from_port       = 80
                 to_port         = 80

@@ -1,8 +1,7 @@
 
 variable "cluster_name" {
 }
-variable "HostIp" {
-}
+
 variable "ami" {
 }
 variable "instance_type" {
@@ -20,7 +19,6 @@ variable "vpc_id" {
 module "sg_pro"{
     source = "../sg_pro"
     cluster_name = "${var.cluster_name}"
-    HostIp = "${var.HostIp}"
     vpc_id = "${var.vpc_id}"
 }
 
