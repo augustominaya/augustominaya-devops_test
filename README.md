@@ -3,7 +3,7 @@
 
 ![CI/CI Pipeline](/images_infra/cicdpipeline.png)
 
-## Explanation of the CICD process
+## Explanation of the CI/CD process
 
 1. The developer Augusto makes a commit and then a push to the github repository.
 2. the push causes Github to generate a webhook event to call Jenkins.
