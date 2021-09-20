@@ -41,16 +41,14 @@
 
 ![Directories](/images_infra/directories.png)
 
-#### 1- Infra_pro_terraform: Contains the terraform code to mount the infrastructure and a shell script used by the pipeline in Jenkins.
+#### 1- jenkins_install: contains the terraform code to build the jenkins instance, ansible for the configuration of all dependencies, some scripts and the Jenkins file that we will execute in the pipeline.
 
 Subfolders and their content:
 
-* **auto_sg_pro.** Module to create the auto scaling group and policy resources.
-* **ec2_pro.** Module to create load balancing resources and ec2 instances.
-* **script.** It contains a script to stop an instance from the console "stop_instance.sh" and a script to run a stress test on an instance "run_cpu_stress.sh".
-* **sg_pro.** Module to create the security groups of the ec2 and load balance instances.
-* **vpc_modules.** Module that allows you to create the production vpc.
-* **infra_build.sh,** script called from Jenkins to build the infrastructure in production.
+* **ansible_jenkins.** Ansible's playbook to configure and install dependencies on the server.
+* **script.** Start, stop and terminate Jenkins instance from shell script by command line.
+* **terraform_jenkins.** Terraform code to create the jenkins instance.
+* **Jenkinsfile.** The steps to execute the pipeline are defined.
 
 #### 2- QA_EC2_code: Contains the terraform code to create the QA instance to test the new code, and the “app_test.sh” script used by jenkins to call the terraform code.
 
@@ -60,16 +58,7 @@ Subfolders and their content:
 * **QA_sg.** Module to create the security group.
 * **app_test.sh,** script called from jenkins to create QA test instance.
 
-#### 3- jenkins_install: contains the terraform code to build the jenkins instance, ansible for the configuration of all dependencies, some scripts and the Jenkins file that we will execute in the pipeline.
-
-Subfolders and their content:
-
-* **ansible_jenkins.** Ansible's playbook to configure and install dependencies on the server.
-* **script.** Start, stop and terminate Jenkins instance from shell script by command line.
-* **terraform_jenkins.** Terraform code to create the jenkins instance.
-* **Jenkinsfile.** The steps to execute the pipeline are defined.
-
-#### 4- packer_img. It contains the files necessary to provision the server and create the image with the new version of the code.
+#### 3- packer_img. It contains the files necessary to provision the server and create the image with the new version of the code.
 
 Subfolders and their content:
 
@@ -79,6 +68,17 @@ Subfolders and their content:
 * **last_image.log,** ami identifier in aws of the last image created with packer.
 * **packer_image.json,** code in json format that allows packer to build the image.
 * **previous_image.log,** ami identifier in aws of the previous image created by packer.
+
+#### 4- Infra_pro_terraform: Contains the terraform code to mount the infrastructure and a shell script used by the pipeline in Jenkins.
+
+Subfolders and their content:
+
+* **auto_sg_pro.** Module to create the auto scaling group and policy resources.
+* **ec2_pro.** Module to create load balancing resources and ec2 instances.
+* **script.** It contains a script to stop an instance from the console "stop_instance.sh" and a script to run a stress test on an instance "run_cpu_stress.sh".
+* **sg_pro.** Module to create the security groups of the ec2 and load balance instances.
+* **vpc_modules.** Module that allows you to create the production vpc.
+* **infra_build.sh,** script called from Jenkins to build the infrastructure in production.
 
 ![CI/CI Pipeline](/images_infra/cicdpipeline.png)
 
