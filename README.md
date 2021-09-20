@@ -108,6 +108,6 @@ Subfolders and their content:
 * **Terraform destroy.** The test completes successfully, we terminate the instance with terraform destroy.
 * **Test complete.** The application test is completed successfully. 
 
-![Jenkins Pipeline](/images_infra/pipelinestep2.png)
+![Jenkins Pipeline](/images_infra/pipelinestep22.png)
 
 ![Pipeline step 3 Deploy_Infra_Pro](/images_infra/pipelinestep3.png)
