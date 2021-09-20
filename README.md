@@ -97,15 +97,16 @@ Subfolders and their content:
 
 ### Jenkins Pipeline Step 1 - Test_QA_EC2
 
-* **Image in packer.** The cycle is started by verifying if the file named “last_image.log” exists in the operating system. If positive, the id of the image found inside the file is read and exported to an environment variable.
+* **Image in packer.** The cycle is started by verifying if the file named “last_image.log” exists in the operating system. If it is positive, the id of the image found inside the file is read and exported to an environment variable, otherwise the test is unsuccessful.**Test failed**
 * **Terraform Apply.** Through an environment variable, we pass terraform the id of the image to use, and launch the terraform apply command.
-* **Terraform error.** If the instance is created correctly we continue the process, otherwise the test is unsuccessful.
+* **Terraform error.** If the instance is created correctly we continue the process, otherwise the test is unsuccessful. **Test failed**
 * **Get instance IP.** With the terraform output command we retrieve the public ip of the instance,
-* **Instance ip ok ?** If the IP is recovered we continue the process, otherwise the test is unsuccessful.
+* **Instance ip ok ?** If the IP is recovered we continue the process, otherwise the test is unsuccessful. **Test failed**
 * **App http request.** Using the curl command we make an http request to the previously recovered public ip.
 * **Get response code.** We retrieve the http response code.
-* **Response code ok ?** If the http code is satisfactory we give the test completed, otherwise it is unsuccessful.
-* **Terraform destroy.** The test completes successfully, we terminate the instance with terraform destroy, and the application test completes successfully.
+* **Response code ok ?** If the http code is satisfactory we give the test completed, otherwise it is unsuccessful. **Test failed**
+* **Terraform destroy.** The test completes successfully, we terminate the instance with terraform destroy.
+* **Test complete.** The application test is completed successfully. 
 
 ![Jenkins Pipeline](/images_infra/pipelinestep2.png)
 
