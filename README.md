@@ -138,7 +138,11 @@ cp ~/Downloads/*.pem aws_ssh_key
 ```sh
 vi jenkins_install/ansible_jenkins/inventory
 ```
-4. Let's access the jenkins_install / ansible_jenkins / directory and run our playbook install_jenkins.yml
+4. We open the main.yml variable file inside the jenkins role and change the jenkins_server_URL variable, we put the public ip address of the jenkins server.
+```sh
+vi jenkins_install/ansible_jenkins/roles/jenkins/vars/main.yml
+```
+5. Let's access the jenkins_install / ansible_jenkins / directory and run our playbook install_jenkins.yml
 ```sh
 cd jenkins_install/ansible_jenkins/ && sudo ansible-playbook -i inventory install_jenkins.yml
 ```
