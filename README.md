@@ -1,5 +1,6 @@
 # Implementation of a CI/CD infrastructure
 
+![CI/CI Pipeline](/images_infra/infra_cicd.png)
 
 ![CI/CI Pipeline](/images_infra/cicdpipeline.png)
 
