@@ -69,6 +69,17 @@ Subfolders and their content:
 * **terraform_jenkins.** Terraform code to create the jenkins instance.
 * **Jenkinsfile.** The steps to execute the pipeline are defined.
 
+#### 4- packer_img. It contains the files necessary to provision the server and create the image with the new version of the code.
+
+Subfolders and their content:
+
+* **ansible_code.** Contains the playbook to configure, install and deploy the application in the instance where the image will be built.
+* **terraform_test_ansible_code.** Terraform code that creates an instance to test the ansible playbook.
+* **app_build.sh,** Sell script that calls packer to build the image.
+* **last_image.log,** ami identifier in aws of the last image created with packer.
+* **packer_image.json,** code in json format that allows packer to build the image.
+* **previous_image.log,** ami identifier in aws of the previous image created by packer.
+
 ![CI/CI Pipeline](/images_infra/cicdpipeline.png)
 
 ## Explanation of the CI/CD process
