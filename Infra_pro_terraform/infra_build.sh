@@ -5,12 +5,12 @@
 
 # function area
 
-Test_failed()
+Deploy_failed()
 {
 sleep 5
 terraform destroy -auto-approve
 echo "###################################"
-echo "# **ERROR** Test failed **ERROR** #"
+echo "# **ERROR** Deploy failed **ERROR** #"
 echo "###################################"
 }
 
@@ -38,7 +38,7 @@ terraform apply -auto-approve -var "last_ami=${last_ami}"
 
 if [ $? -ne '0' ]
 then  
-Test_failed
+Deploy_failed
 echo "-----> Terraform Error, Please check the logs in the screen"
 exit 1
 fi
