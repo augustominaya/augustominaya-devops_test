@@ -37,7 +37,9 @@
 
 ## Project description.
 
-### The project is made up of 5 folders.
+### The project contains 4 important folders.
+
+![Directories](/images_infra/directories.png)
 
 #### 1- Infra_pro_terraform: Contains the terraform code to mount the infrastructure and a shell script used by the pipeline in Jenkins.
 
@@ -45,9 +47,9 @@ Subfolders and their content:
 
 * **auto_sg_pro.** Module to create the auto scaling group and policy resources.
 * **ec2_pro.** Module to create load balancing resources and ec2 instances.
+* **script.** It contains a script to stop an instance from the console "stop_instance.sh" and a script to run a stress test on an instance "run_cpu_stress.sh".
 * **sg_pro.** Module to create the security groups of the ec2 and load balance instances.
 * **vpc_modules.** Module that allows you to create the production vpc.
-* **script.** It contains a script to stop an instance from the console "stop_instance.sh" and a script to run a stress test on an instance "run_cpu_stress.sh".
 * **infra_build.sh,** script called from Jenkins to build the infrastructure in production.
 
 
