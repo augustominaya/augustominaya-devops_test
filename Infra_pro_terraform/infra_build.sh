@@ -47,9 +47,10 @@ echo "#-----> STEP_03 <-----#"
 echo "#-----> check the application of the change of image"
 
 min_instance=2
-new_instance_cout=`aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=tag:Name,Values='*cluster*'"  |grep $last_ami |wc -l`
+#new_instance_cout=`aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=tag:Name,Values='*cluster*'"  |grep $last_ami |wc -l`
 
  while [ $min_instance -gt 0 ] ;do
+
 new_instance_cout=`aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=tag:Name,Values='*cluster*'" |grep $last_ami |wc -l`
 
 sleep 1
