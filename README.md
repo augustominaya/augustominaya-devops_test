@@ -126,6 +126,22 @@ terraform plan && teraform apply
 
 ## Server configuration with ansible.
 
+1. We move to the devops_test/ path, and create the aws_ssh_key folder.
+```sh
+mkdir aws_ssh_key
+```
+2. We copy the rsa key in .pem format that we have downloaded from aws to our machine. If the key is in the download directory, copy it with the following command.
+```sh
+cp ~/Downloads/*.pem aws_ssh_key
+```
+3. We open the inventory file and configure 2 variables, ansible_host and ansible_ssh_private_key_file.
+```sh
+vi jenkins_install/ansible_jenkins/inventory
+```
+4. Let's access the jenkins_install / ansible_jenkins / directory and run our playbook install_jenkins.yml
+```sh
+cd jenkins_install/ansible_jenkins/ && sudo ansible-playbook -i inventory install_jenkins.yml
+```
 
 
 ![CI/CI Pipeline](/images_infra/cicdpipeline.png)
