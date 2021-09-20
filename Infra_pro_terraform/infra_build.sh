@@ -51,9 +51,9 @@ min_instance=2
 
  while [ $min_instance -gt 0 ] ;do
 
-new_instance_cout=`aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=tag:Name,Values='*cluster*'" |grep $last_ami |wc -l`
+new_instance_cout=`aws ec2 describe-instances --region us-east-1 --filters "Name=instance-state-name,Values=running" "Name=tag:Name,Values='*cluster*'" |grep $last_ami |wc -l`
 
-sleep 1
+sleep 10
 if [ $new_instance_cout -ge 1 ]
 then  
 
