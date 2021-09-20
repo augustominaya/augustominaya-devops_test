@@ -53,15 +53,3 @@
   apt: name=packer state=latest
   tags: [STEP_01,STEP_0113]
 
-- name: Install plugin
-  jenkins_plugin:
-    name: build-pipeline-plugin
-    url_username: aminaya
-    url_password: Colegio0885
-    url: '{{jenkins_server_URL}}'
-  tags: [STEP_01, STEP_0111]
-
-- name: Install plugin
-  jenkins_plugin:
-    name: build-pipeline-plugin
-  tags: [STEP_01, STEP_0111]
