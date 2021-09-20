@@ -10,7 +10,7 @@
 * Code repository. **Github.**
 * Continuous integration automation. **Jenkins.**
 * Automation of configuration and provisioning. **Ansible.**
-* Construction of imagener and templates. **Packer.**
+* Image builder. **Packer.**
 * Infrastructure management as code. **Terraform.**
 * Knowledge in; **shell script, json encode, php, html, Devops concept.**
 
@@ -90,3 +90,6 @@ Subfolders and their content:
 4. Step one, execute a script that calls terraform to create an EC2 where the new version of the application is displayed and later a navigation test is executed.
 5. Step two, run a script that calls packer to build an image including the new version of the application and its dependencies.
 6. Step three, execute a script that calls terraform to deploy the image created with packer that contains the new version of the code.
+
+![Jenkins Pipeline](/images_infra/pipeline.png)
+
