@@ -94,15 +94,39 @@ To get Jenkins up and running we need the following prerequisites.
 
 ## Implementation of the Jenkins instance in AWS.
 
-* We download the code from the repository on github.
+1. We download the code from the repository on github.
 
 ```sh
 git clone https://github.com/augustominaya/augustominaya-devops_test.git devops_test
 ```
-* We must change some variables inside the ec2_jenkins_main.tf file located in the path devops_test / jenkins_install / terraform_jenkins / ec2_jenkins /
+2. We must change some variables inside the ec2_jenkins_main.tf file located in the path devops_test / jenkins_install / terraform_jenkins / ec2_jenkins /
 ```sh
 vi devops_test/jenkins_install/terraform_jenkins/ec2_jenkins/ec2_jenkins_main.tf
 ```
+### Mandatory variables
+
+* Subnetid = “Subnet id on the vpc you want to use”
+* aws_key = “rsa_key”
+
+### Optional variables
+
+* Nameserver = “Server name”
+* instancetype = “Instance type”
+
+3. The terraform code for Jenkins makes use of the jenkins_SG module, to create the security group and the ec2_Jenkins module, to create the instance and the elastic ip.
+
+4. We move to the devops_test directory and execute terraform init, then a terraform plan and finally a terraform apply
+```sh
+cd devops_test/ && teraform init
+```
+```sh
+terraform plan && teraform apply
+```
+5. After terraform completes the creation of the Jenkins instance, in the output it will show us the public IP address to connect our instance. Then this IP will be configured in the inventory that ansible will use to connect to configure the server.
+
+## Server configuration with ansible.
+
+
 
 ![CI/CI Pipeline](/images_infra/cicdpipeline.png)
 
