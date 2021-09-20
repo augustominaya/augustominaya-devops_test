@@ -93,3 +93,6 @@ Subfolders and their content:
 
 ![Jenkins Pipeline](/images_infra/pipeline.png)
 
+![Jenkins Pipeline](/images_infra/pipelinestep1.png)
+
+![Jenkins Pipeline](/images_infra/pipelinestep2.png)
